@@ -1,24 +1,24 @@
 {
   "profile": {
-    "name": "Your Name",
-    "shortName": "You",
-    "title": "Your Job Title",
-    "summary": "2–3 sentences: who you are, your strengths, and what role you want.",
-    "email": "you@email.com",
-    "phone": "+1 234 567 8900",
-    "location": "Your City, Country",
+    "name": "PEDDI VARSHITH",
+    "shortName": "Varshith",
+    "title": "software developer",
+    "summary": "Software Developer is a professional who designs, builds, tests, and maintains software applications, websites, and computer systems. They use programming languages such as Java, Python, JavaScript, C++, and PHP to create solutions that meet user and business requirements.",
+    "email": "peddivarshith903@com",
+    "phone": "9032279285",
+    "location": "Hyderabad, India",
     "website": "https://yoursite.com",
-    "resumePdf": ""
+    "resumePdf": "varshith_resume.pdf"
   },
   "social": [
-    { "label": "LinkedIn", "href": "https://linkedin.com/in/yourprofile" },
-    { "label": "GitHub", "href": "https://github.com/yourusername" }
+    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/peddi-varshith-2b2902290/" },
+    { "label": "GitHub", "href": "https://github.com/Varshithpeddi" }
   ],
   "experience": [
     {
-      "role": "Job Title",
-      "company": "Company Name",
-      "location": "City",
+      "role": "software developer",
+      "company": "Cognizant",
+      "location": "hyderabad, india",
       "period": "2024 — Present",
       "bullets": [
         "What you did — use numbers if possible (e.g. improved X by 30%)",

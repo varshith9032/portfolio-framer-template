@@ -7,7 +7,7 @@
     "dev": "vite --open",
     "start": "vite --open",
     "build": "tsc && vite build",
-    "build:pages": "tsc && vite build",
+    "build:pages": "tsc && vite build --mode pages",
     "preview": "vite preview"
   },
   "devDependencies": {
