@@ -1,101 +1,46 @@
-// ═══════════════════════════════════════════════════════════════════
-// EDIT THIS FILE — all your name, work, and copy lives here only.
-// Save the file → browser refreshes automatically (npm run dev).
-// ═══════════════════════════════════════════════════════════════════
+import resumeData from './resume.json'
+
+export type ResumeData = typeof resumeData
+
+export const resume = resumeData
 
 export const site = {
-  /** Full name shown in the hero */
-  name: 'Your Name',
-  /** Short label in the top-left logo (e.g. first name or initials) */
-  shortName: 'You',
-  role: 'Your Role — e.g. Designer & Developer',
-  tagline: 'One line about what you do.',
-  email: 'you@email.com',
-  location: 'Your City, Country',
-  social: [
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/yourprofile' },
-    { label: 'GitHub', href: 'https://github.com/yourusername' },
-    { label: 'Twitter', href: 'https://twitter.com/yourhandle' },
-    // Add or remove links — copy the line above
-  ],
+  name: resume.profile.name,
+  shortName: resume.profile.shortName,
+  role: resume.profile.title,
+  tagline: resume.profile.summary,
+  email: resume.profile.email,
+  phone: resume.profile.phone,
+  location: resume.profile.location,
+  website: resume.profile.website,
+  resumePdf: resume.profile.resumePdf,
+  social: resume.social,
 }
 
-export const hero = {
-  primaryButton: 'View work',
-  secondaryButton: 'Get in touch',
-}
-
+export const hero = resume.hero
 export const work = {
-  sectionLabel: 'Selected work',
-  title: 'My',
-  titleHighlight: 'projects',
-  /**
-   * Your projects — add, remove, or duplicate blocks.
-   * image: use a URL, or put files in public/projects/ and use "/projects/photo.jpg"
-   * href: link to case study, live site, or "#" if none yet
-   */
-  projects: [
-    {
-      title: 'Project One',
-      category: 'Web Design',
-      year: '2025',
-      description: 'Short sentence about what you built or designed.',
-      image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80',
-      href: 'https://example.com',
-    },
-    {
-      title: 'Project Two',
-      category: 'Branding',
-      year: '2024',
-      description: 'Another one-line summary of the project.',
-      image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
-      href: '#',
-    },
-    // {
-    //   title: 'Project Three',
-    //   category: 'Development',
-    //   year: '2023',
-    //   description: 'Describe the outcome or your role.',
-    //   image: '/projects/my-screenshot.png',
-    //   href: 'https://github.com/you/repo',
-    // },
-  ],
+  sectionLabel: resume.sections.workLabel,
+  title: resume.sections.workTitle,
+  titleHighlight: resume.sections.workTitleHighlight,
+  projects: resume.projects,
 }
-
-export const about = {
-  sectionLabel: 'About',
-  title: 'About me',
-  /** Each string = one paragraph */
-  paragraphs: [
-    'Write your bio here. Who you are, what you focus on, and who you work with.',
-    'Optional second paragraph — hobbies, tools you love, or what you are looking for next.',
-  ],
-  experienceLabel: 'Experience',
-  experience: [
-    { role: 'Your Job Title', company: 'Company Name', period: '2024 — Present' },
-    { role: 'Previous Role', company: 'Previous Company', period: '2022 — 2024' },
-  ],
-  skillsLabel: 'Skills',
-  skills: ['Skill 1', 'Skill 2', 'Skill 3', 'Skill 4'],
+export const resumeSection = {
+  sectionLabel: resume.sections.resumeLabel,
+  title: resume.sections.resumeTitle,
+  experienceLabel: resume.sections.experienceLabel,
+  educationLabel: resume.sections.educationLabel,
+  skillsLabel: resume.sections.skillsLabel,
+  certificationsLabel: resume.sections.certificationsLabel,
+  experience: resume.experience,
+  education: resume.education,
+  skills: resume.skills,
+  certifications: resume.certifications,
 }
-
 export const contact = {
-  sectionLabel: 'Contact',
-  title: "Let's work together",
-  description: 'How people can reach you — availability, reply time, types of work you take.',
-  buttonText: 'Email me',
+  sectionLabel: resume.sections.contactLabel,
+  title: resume.sections.contactTitle,
+  description: resume.sections.contactDescription,
+  buttonText: resume.sections.contactButton,
 }
-
-export const nav = {
-  links: [
-    { id: 'work', label: 'Work' },
-    { id: 'about', label: 'About' },
-    { id: 'contact', label: 'Contact' },
-  ],
-  ctaText: 'Hire me',
-}
-
-// Optional: accent color (also update --accent in src/index.css if you want)
-export const theme = {
-  accent: '#6366f1',
-}
+export const nav = resume.nav
+export const theme = resume.theme

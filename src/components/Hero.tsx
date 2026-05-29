@@ -86,7 +86,11 @@ export default function Hero() {
           <a href="#work" className="btn btn-primary">
             {hero.primaryButton}
           </a>
-          <a href="#contact" className="btn btn-ghost">
+          <a
+            href={site.resumePdf ? site.resumePdf : '#contact'}
+            className="btn btn-ghost"
+            {...(site.resumePdf ? { download: true, target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
             {hero.secondaryButton}
           </a>
         </motion.div>

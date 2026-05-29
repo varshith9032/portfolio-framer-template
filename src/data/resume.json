@@ -1,0 +1,108 @@
+{
+  "profile": {
+    "name": "Your Name",
+    "shortName": "You",
+    "title": "Your Job Title",
+    "summary": "2–3 sentences: who you are, your strengths, and what role you want.",
+    "email": "you@email.com",
+    "phone": "+1 234 567 8900",
+    "location": "Your City, Country",
+    "website": "https://yoursite.com",
+    "resumePdf": ""
+  },
+  "social": [
+    { "label": "LinkedIn", "href": "https://linkedin.com/in/yourprofile" },
+    { "label": "GitHub", "href": "https://github.com/yourusername" }
+  ],
+  "experience": [
+    {
+      "role": "Job Title",
+      "company": "Company Name",
+      "location": "City",
+      "period": "2024 — Present",
+      "bullets": [
+        "What you did — use numbers if possible (e.g. improved X by 30%)",
+        "Another achievement or responsibility",
+        "Third bullet (optional — delete if not needed)"
+      ]
+    },
+    {
+      "role": "Previous Job Title",
+      "company": "Previous Company",
+      "location": "City",
+      "period": "2022 — 2024",
+      "bullets": [
+        "Key result or project you led",
+        "Tools or skills you used"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Degree Name",
+      "school": "University / College",
+      "location": "City",
+      "period": "2020 — 2024",
+      "details": "GPA, honors, or relevant coursework (optional)"
+    }
+  ],
+  "skills": {
+    "technical": ["JavaScript", "React", "Python", "Figma"],
+    "soft": ["Communication", "Team leadership", "Problem solving"]
+  },
+  "certifications": [
+    {
+      "name": "Certification Name",
+      "issuer": "Issuing Organization",
+      "year": "2024"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Project One",
+      "category": "Web Design",
+      "year": "2025",
+      "description": "One line about the project.",
+      "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
+      "href": "https://example.com"
+    },
+    {
+      "title": "Project Two",
+      "category": "Development",
+      "year": "2024",
+      "description": "Another project summary.",
+      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
+      "href": "#"
+    }
+  ],
+  "sections": {
+    "workLabel": "Selected work",
+    "workTitle": "My",
+    "workTitleHighlight": "projects",
+    "resumeLabel": "Resume",
+    "resumeTitle": "Experience & background",
+    "experienceLabel": "Work experience",
+    "educationLabel": "Education",
+    "skillsLabel": "Skills",
+    "certificationsLabel": "Certifications",
+    "contactLabel": "Contact",
+    "contactTitle": "Let's work together",
+    "contactDescription": "Open for opportunities. I usually reply within 48 hours.",
+    "contactButton": "Email me"
+  },
+  "nav": {
+    "links": [
+      { "id": "work", "label": "Work" },
+      { "id": "resume", "label": "Resume" },
+      { "id": "contact", "label": "Contact" }
+    ],
+    "ctaText": "Hire me"
+  },
+  "hero": {
+    "primaryButton": "View work",
+    "secondaryButton": "Download resume"
+  },
+  "theme": {
+    "accent": "#6366f1"
+  }
+}
