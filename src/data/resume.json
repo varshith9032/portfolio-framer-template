@@ -2,12 +2,12 @@
   "profile": {
     "name": "PEDDI VARSHITH",
     "shortName": "Varshith",
-    "title": "software developer",
-    "summary": "Software Developer is a professional who designs, builds, tests, and maintains software applications, websites, and computer systems. They use programming languages such as Java, Python, JavaScript, C++, and PHP to create solutions that meet user and business requirements.",
-    "email": "peddivarshith903@com",
+    "title": "Software Developer",
+    "summary": "Software Developer at Cognizant, Hyderabad. I design, build, and maintain web applications and software systems using JavaScript, React, Python, and Java.",
+    "email": "peddivarshith903@gmail.com",
     "phone": "9032279285",
     "location": "Hyderabad, India",
-    "website": "https://yoursite.com",
+    "website": "https://varshith9032.github.io/portfolio-framer-template/",
     "resumePdf": "/varshith_resume.pdf"
   },
   "social": [
@@ -16,63 +16,47 @@
   ],
   "experience": [
     {
-      "role": "software developer",
+      "role": "Software Developer",
       "company": "Cognizant",
-      "location": "hyderabad, india",
+      "location": "Hyderabad, India",
       "period": "2024 — Present",
       "bullets": [
-        "What you did — use numbers if possible (e.g. improved X by 30%)",
-        "Another achievement or responsibility",
-        "Third bullet (optional — delete if not needed)"
-      ]
-    },
-    {
-      "role": "Previous Job Title",
-      "company": "Previous Company",
-      "location": "City",
-      "period": "2022 — 2024",
-      "bullets": [
-        "Key result or project you led",
-        "Tools or skills you used"
+        "Develop and maintain software applications for client projects",
+        "Build responsive web interfaces using React and modern JavaScript",
+        "Collaborate with cross-functional teams to deliver quality solutions on time"
       ]
     }
   ],
   "education": [
     {
-      "degree": "Degree Name",
-      "school": "University / College",
-      "location": "City",
+      "degree": "Bachelor's in Computer Science",
+      "school": "Your University",
+      "location": "India",
       "period": "2020 — 2024",
-      "details": "GPA, honors, or relevant coursework (optional)"
+      "details": "Update with your degree and college name"
     }
   ],
   "skills": {
-    "technical": ["JavaScript", "React", "Python", "Figma"],
+    "technical": ["JavaScript", "React", "Python", "Java", "HTML", "CSS", "Git"],
     "soft": ["Communication", "Team leadership", "Problem solving"]
   },
-  "certifications": [
-    {
-      "name": "Certification Name",
-      "issuer": "Issuing Organization",
-      "year": "2024"
-    }
-  ],
+  "certifications": [],
   "projects": [
     {
-      "title": "Project One",
-      "category": "Web Design",
+      "title": "Portfolio Website",
+      "category": "Web Development",
       "year": "2025",
-      "description": "One line about the project.",
-      "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80",
-      "href": "https://example.com"
+      "description": "Personal portfolio built with React, Framer Motion, and Vite.",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+      "href": "https://varshith9032.github.io/portfolio-framer-template/"
     },
     {
-      "title": "Project Two",
-      "category": "Development",
+      "title": "Web Application",
+      "category": "Full Stack",
       "year": "2024",
-      "description": "Another project summary.",
-      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
-      "href": "#"
+      "description": "Full-stack application with React frontend and API integration.",
+      "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+      "href": "https://github.com/Varshithpeddi"
     }
   ],
   "sections": {
@@ -103,7 +87,7 @@
     "secondaryButton": "Download resume"
   },
   "theme": {
-    "preset": "midnight",
-    "accent": "#6366f1"
+    "preset": "ocean",
+    "accent": "#22d3ee"
   }
 }
