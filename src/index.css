@@ -139,6 +139,18 @@ body::before {
   z-index: 1;
 }
 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  z-index: 200;
+  pointer-events: none;
+}
+
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(3rem, 10vw, 6.5rem);
@@ -147,6 +159,22 @@ body::before {
   letter-spacing: -0.04em;
   max-width: 14ch;
   margin-bottom: 1.5rem;
+}
+
+.hero-title-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.12em;
+}
+
+.hero-title-word {
+  overflow: hidden;
+  display: inline-block;
+  padding-bottom: 0.05em;
+}
+
+.hero-title-word > span {
+  display: inline-block;
 }
 
 .hero-tagline {
@@ -185,12 +213,14 @@ body::before {
   border: 1px solid var(--border);
   background: var(--bg-elevated);
   overflow: hidden;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  color: inherit;
+  will-change: transform;
 }
 
 .project-card:hover {
   border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
-  box-shadow: 0 20px 50px color-mix(in srgb, var(--accent) 15%, transparent);
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--accent) 18%, transparent);
 }
 
 .project-card-meta {

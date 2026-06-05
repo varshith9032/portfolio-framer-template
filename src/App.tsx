@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useContent } from './context/ContentContext'
 import { applyTheme } from './data/themes'
 import Navbar from './components/Navbar'
+import ScrollProgress from './components/ScrollProgress'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
 import Resume from './components/Resume'
@@ -19,6 +20,7 @@ export default function App() {
 
   return (
     <>
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />

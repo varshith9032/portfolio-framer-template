@@ -1,4 +1,4 @@
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
+import { motion, useScroll, useMotionValueEvent, useSpring, useTransform } from 'framer-motion'
 import { Pencil } from 'lucide-react'
 import { useState } from 'react'
 import { useContent } from '../context/ContentContext'
@@ -7,6 +7,10 @@ export default function Navbar() {
   const { site, nav, setEditorOpen } = useContent()
   const [scrolled, setScrolled] = useState(false)
   const { scrollY } = useScroll()
+  const blur = useSpring(useTransform(scrollY, [0, 80], [0, 14]), { stiffness: 120, damping: 28 })
+  const navBg = useSpring(useTransform(scrollY, [0, 80], [0, 1]), { stiffness: 120, damping: 28 })
+  const backdropFilter = useTransform(blur, (v) => `blur(${v}px)`)
+  const background = useTransform(navBg, (v) => (v > 0.5 ? 'var(--nav-scrolled-bg)' : 'transparent'))
 
   useMotionValueEvent(scrollY, 'change', (y) => setScrolled(y > 40))
 
@@ -14,7 +18,7 @@ export default function Navbar() {
     <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ type: 'spring', stiffness: 90, damping: 22 }}
       style={{
         position: 'fixed',
         top: 0,
@@ -24,10 +28,9 @@ export default function Navbar() {
         height: 'var(--nav-height)',
         display: 'flex',
         alignItems: 'center',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        background: scrolled ? 'var(--nav-scrolled-bg)' : 'transparent',
+        backdropFilter,
+        background,
         borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-        transition: 'background 0.3s, border 0.3s',
       }}
     >
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
