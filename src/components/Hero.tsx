@@ -1,52 +1,27 @@
 import { motion } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
-import { site, hero } from '../data/content'
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: 0.15 * i, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
-  }),
-}
+import { useContent } from '../context/ContentContext'
+import { easeOut, fadeUp } from '../lib/motion'
 
 export default function Hero() {
+  const { site, hero } = useContent()
+
   return (
-    <section
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        paddingTop: 'var(--nav-height)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
+    <section className="hero">
       <motion.div
         aria-hidden
-        style={{
-          position: 'absolute',
-          top: '10%',
-          right: '-10%',
-          width: '60vw',
-          height: '60vw',
-          maxWidth: 700,
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, var(--accent-soft) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        className="hero-glow hero-glow--1"
+        animate={{ scale: [1, 1.12, 1], opacity: [0.45, 0.75, 0.45], x: [0, 20, 0] }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
       />
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <motion.p
-          custom={0}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="section-label"
-        >
+      <motion.div
+        aria-hidden
+        className="hero-glow hero-glow--2"
+        animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.55, 0.3], y: [0, -30, 0] }}
+        transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <div className="container hero-content">
+        <motion.p custom={0} variants={fadeUp} initial="hidden" animate="visible" className="section-label">
           {site.role}
         </motion.p>
         <motion.h1
@@ -54,16 +29,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="gradient-text"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 'clamp(3rem, 10vw, 6.5rem)',
-            fontWeight: 800,
-            lineHeight: 1.02,
-            letterSpacing: '-0.04em',
-            maxWidth: '14ch',
-            marginBottom: '1.5rem',
-          }}
+          className="gradient-text hero-title"
         >
           {site.name}
         </motion.h1>
@@ -72,7 +38,7 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          style={{ fontSize: '1.25rem', color: 'var(--text-muted)', maxWidth: '42ch', marginBottom: '2.5rem' }}
+          className="hero-tagline"
         >
           {site.tagline}
         </motion.p>
@@ -81,35 +47,38 @@ export default function Hero() {
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}
+          className="hero-actions"
         >
-          <a href="#work" className="btn btn-primary">
+          <motion.a
+            href="#work"
+            className="btn btn-primary"
+            whileHover={{ scale: 1.04, y: -3 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+          >
             {hero.primaryButton}
-          </a>
-          <a
-            href={site.resumePdf ? site.resumePdf : '#contact'}
+          </motion.a>
+          <motion.a
+            href={site.resumePdfUrl || '#contact'}
             className="btn btn-ghost"
-            {...(site.resumePdf ? { download: true, target: '_blank', rel: 'noopener noreferrer' } : {})}
+            whileHover={{ scale: 1.04, y: -3 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            {...(site.resumePdfUrl ? { download: site.resumePdf.split('/').pop() || 'resume.pdf' } : {})}
           >
             {hero.secondaryButton}
-          </a>
+          </motion.a>
         </motion.div>
       </div>
       <motion.a
         href="#work"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        style={{
-          position: 'absolute',
-          bottom: '2rem',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          color: 'var(--text-muted)',
-        }}
+        className="hero-scroll"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.1, duration: 0.6, ease: easeOut }}
         aria-label="Scroll to work"
       >
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
+        <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}>
           <ArrowDown size={24} />
         </motion.div>
       </motion.a>

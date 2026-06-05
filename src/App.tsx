@@ -1,18 +1,21 @@
 import { useEffect } from 'react'
-import { site, theme } from './data/content'
+import { useContent } from './context/ContentContext'
+import { applyTheme } from './data/themes'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
 import Resume from './components/Resume'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ContentEditor, { EditFab } from './components/ContentEditor'
 
 export default function App() {
+  const { site, theme } = useContent()
+
   useEffect(() => {
     document.title = `${site.name} — Portfolio`
-    document.documentElement.style.setProperty('--accent', theme.accent)
-    document.documentElement.style.setProperty('--accent-soft', `${theme.accent}26`)
-  }, [])
+    applyTheme(theme)
+  }, [site.name, theme])
 
   return (
     <>
@@ -24,6 +27,8 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <EditFab />
+      <ContentEditor />
     </>
   )
 }

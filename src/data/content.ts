@@ -2,45 +2,58 @@ import resumeData from './resume.json'
 
 export type ResumeData = typeof resumeData
 
-export const resume = resumeData
+export const defaultResume: ResumeData = resumeData
 
-export const site = {
-  name: resume.profile.name,
-  shortName: resume.profile.shortName,
-  role: resume.profile.title,
-  tagline: resume.profile.summary,
-  email: resume.profile.email,
-  phone: resume.profile.phone,
-  location: resume.profile.location,
-  website: resume.profile.website,
-  resumePdf: resume.profile.resumePdf,
-  social: resume.social,
+/** Path to a file in /public (works on dev server and GitHub Pages). */
+export function resolvePublicAsset(path: string): string {
+  if (!path) return ''
+  if (/^https?:\/\//i.test(path)) return path
+  const file = path.replace(/^\//, '')
+  const base = import.meta.env.BASE_URL
+  return `${base}${file}`
 }
 
-export const hero = resume.hero
-export const work = {
-  sectionLabel: resume.sections.workLabel,
-  title: resume.sections.workTitle,
-  titleHighlight: resume.sections.workTitleHighlight,
-  projects: resume.projects,
+export function buildContent(data: ResumeData) {
+  return {
+    site: {
+      name: data.profile.name,
+      shortName: data.profile.shortName,
+      role: data.profile.title,
+      tagline: data.profile.summary,
+      email: data.profile.email,
+      phone: data.profile.phone,
+      location: data.profile.location,
+      website: data.profile.website,
+      resumePdf: data.profile.resumePdf,
+      resumePdfUrl: resolvePublicAsset(data.profile.resumePdf),
+      social: data.social,
+    },
+    hero: data.hero,
+    work: {
+      sectionLabel: data.sections.workLabel,
+      title: data.sections.workTitle,
+      titleHighlight: data.sections.workTitleHighlight,
+      projects: data.projects,
+    },
+    resumeSection: {
+      sectionLabel: data.sections.resumeLabel,
+      title: data.sections.resumeTitle,
+      experienceLabel: data.sections.experienceLabel,
+      educationLabel: data.sections.educationLabel,
+      skillsLabel: data.sections.skillsLabel,
+      certificationsLabel: data.sections.certificationsLabel,
+      experience: data.experience,
+      education: data.education,
+      skills: data.skills,
+      certifications: data.certifications,
+    },
+    contact: {
+      sectionLabel: data.sections.contactLabel,
+      title: data.sections.contactTitle,
+      description: data.sections.contactDescription,
+      buttonText: data.sections.contactButton,
+    },
+    nav: data.nav,
+    theme: data.theme,
+  }
 }
-export const resumeSection = {
-  sectionLabel: resume.sections.resumeLabel,
-  title: resume.sections.resumeTitle,
-  experienceLabel: resume.sections.experienceLabel,
-  educationLabel: resume.sections.educationLabel,
-  skillsLabel: resume.sections.skillsLabel,
-  certificationsLabel: resume.sections.certificationsLabel,
-  experience: resume.experience,
-  education: resume.education,
-  skills: resume.skills,
-  certifications: resume.certifications,
-}
-export const contact = {
-  sectionLabel: resume.sections.contactLabel,
-  title: resume.sections.contactTitle,
-  description: resume.sections.contactDescription,
-  buttonText: resume.sections.contactButton,
-}
-export const nav = resume.nav
-export const theme = resume.theme

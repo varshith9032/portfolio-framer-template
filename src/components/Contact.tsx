@@ -1,48 +1,52 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Mail, MapPin } from 'lucide-react'
-import { site, contact } from '../data/content'
+import { useContent } from '../context/ContentContext'
+import { fadeUp, scaleIn, stagger, viewOnce } from '../lib/motion'
 
 export default function Contact() {
+  const { site, contact } = useContent()
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, viewOnce)
 
   return (
-    <section id="contact" ref={ref} style={{ padding: '8rem 0' }}>
+    <section id="contact" ref={ref} className="section-pad">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          style={{
-            padding: '4rem',
-            borderRadius: 'var(--radius)',
-            background: 'linear-gradient(135deg, var(--bg-elevated) 0%, rgba(99, 102, 241, 0.12) 100%)',
-            border: '1px solid var(--border)',
-            textAlign: 'center',
-          }}
+          className="contact-card"
+          variants={scaleIn}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
         >
-          <p className="section-label">{contact.sectionLabel}</p>
-          <h2
-            className="section-title"
-            style={{ marginBottom: '1rem', maxWidth: '20ch', marginInline: 'auto' }}
-          >
-            {contact.title}
-          </h2>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '40ch', marginInline: 'auto' }}>
-            {contact.description}
-          </p>
-          <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.9375rem' }}>
-              <Mail size={18} /> {site.email}
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.9375rem' }}>
-              <MapPin size={18} /> {site.location}
-            </span>
-          </div>
-          <a href={`mailto:${site.email}`} className="btn btn-primary">
-            {contact.buttonText}
-          </a>
+          <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
+            <motion.p variants={fadeUp} custom={0} className="section-label">
+              {contact.sectionLabel}
+            </motion.p>
+            <motion.h2 variants={fadeUp} custom={1} className="section-title contact-title">
+              {contact.title}
+            </motion.h2>
+            <motion.p variants={fadeUp} custom={2} className="contact-desc">
+              {contact.description}
+            </motion.p>
+            <motion.div variants={fadeUp} custom={3} className="contact-meta">
+              <motion.span className="contact-meta-item" whileHover={{ scale: 1.03 }}>
+                <Mail size={18} /> {site.email}
+              </motion.span>
+              <motion.span className="contact-meta-item" whileHover={{ scale: 1.03 }}>
+                <MapPin size={18} /> {site.location}
+              </motion.span>
+            </motion.div>
+            <motion.a
+              variants={fadeUp}
+              custom={4}
+              href={`mailto:${site.email}`}
+              className="btn btn-primary contact-btn"
+              whileHover={{ scale: 1.05, y: -3 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              {contact.buttonText}
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
     </section>

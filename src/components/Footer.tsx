@@ -1,42 +1,44 @@
-import { site } from '../data/content'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
+import { useContent } from '../context/ContentContext'
+import { fadeUp, viewOnce } from '../lib/motion'
 
 export default function Footer() {
+  const { site } = useContent()
+  const ref = useRef(null)
+  const inView = useInView(ref, viewOnce)
   const year = new Date().getFullYear()
 
   return (
-    <footer
-      style={{
-        padding: '2rem 0',
-        borderTop: '1px solid var(--border)',
-      }}
-    >
-      <div
-        className="container"
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1rem',
-        }}
+    <footer ref={ref} className="site-footer">
+      <motion.div
+        className="container site-footer-inner"
+        variants={fadeUp}
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+        custom={0}
       >
-        <span style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+        <span className="footer-copy">
           © {year} {site.name}
         </span>
-        <div style={{ display: 'flex', gap: '1.5rem' }}>
-          {site.social.map((link) => (
-            <a
+        <div className="footer-links">
+          {site.social.map((link, i) => (
+            <motion.a
               key={link.label}
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}
+              className="footer-link"
+              initial={{ opacity: 0, y: 8 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.1 + i * 0.08 }}
+              whileHover={{ y: -2, color: 'var(--accent)' }}
             >
               {link.label}
-            </a>
+            </motion.a>
           ))}
         </div>
-      </div>
+      </motion.div>
     </footer>
   )
 }

@@ -1,105 +1,126 @@
 import type { CSSProperties } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { resumeSection } from '../data/content'
+import { useContent } from '../context/ContentContext'
+import { fadeUp, slideLeft, slideRight, stagger, viewOnce } from '../lib/motion'
 
 export default function Resume() {
+  const { resumeSection } = useContent()
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, viewOnce)
   const { skills, certifications } = resumeSection
 
   return (
-    <section id="resume" ref={ref} style={{ padding: '8rem 0', borderTop: '1px solid var(--border)' }}>
+    <section id="resume" ref={ref} className="section-pad section-border">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          style={{ marginBottom: '3rem' }}
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+          custom={0}
+          className="section-header"
         >
           <p className="section-label">{resumeSection.sectionLabel}</p>
           <h2 className="section-title">{resumeSection.title}</h2>
         </motion.div>
 
-        <div className="resume-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '4rem' }}>
+        <div className="resume-grid">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            variants={slideLeft}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
           >
             <h3 style={headingStyle}>{resumeSection.experienceLabel}</h3>
-            {resumeSection.experience.map((job) => (
-              <article key={`${job.company}-${job.role}`} style={{ marginBottom: '2rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <div>
-                    <strong style={{ display: 'block', fontWeight: 600 }}>{job.role}</strong>
-                    <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-                      {job.company} · {job.location}
-                    </span>
+            <motion.div variants={stagger} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
+              {resumeSection.experience.map((job, i) => (
+                <motion.article
+                  key={`${job.company}-${job.role}`}
+                  variants={fadeUp}
+                  custom={i}
+                  className="resume-item"
+                  whileHover={{ x: 4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+                >
+                  <div className="resume-item-head">
+                    <div>
+                      <strong className="resume-item-role">{job.role}</strong>
+                      <span className="resume-item-sub">
+                        {job.company} · {job.location}
+                      </span>
+                    </div>
+                    <span className="resume-item-period">{job.period}</span>
                   </div>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>{job.period}</span>
-                </div>
-                <ul style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--text-muted)', fontSize: '0.9375rem' }}>
-                  {job.bullets.map((bullet) => (
-                    <li key={bullet} style={{ marginBottom: '0.35rem' }}>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            ))}
+                  <ul className="resume-bullets">
+                    {job.bullets.map((bullet) => (
+                      <motion.li
+                        key={bullet}
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={inView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ delay: 0.15 + i * 0.08 }}
+                      >
+                        {bullet}
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.article>
+              ))}
+            </motion.div>
 
             {resumeSection.education.length > 0 && (
               <>
                 <h3 style={{ ...headingStyle, marginTop: '2.5rem' }}>{resumeSection.educationLabel}</h3>
-                {resumeSection.education.map((edu) => (
-                  <article key={`${edu.school}-${edu.degree}`} style={{ marginBottom: '1.5rem' }}>
-                    <strong style={{ display: 'block', fontWeight: 600 }}>{edu.degree}</strong>
-                    <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                {resumeSection.education.map((edu, i) => (
+                  <motion.article
+                    key={`${edu.school}-${edu.degree}`}
+                    className="resume-item resume-item--compact"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.2 + i * 0.1 }}
+                  >
+                    <strong className="resume-item-role">{edu.degree}</strong>
+                    <span className="resume-item-sub">
                       {edu.school} · {edu.location} · {edu.period}
                     </span>
-                    {edu.details && (
-                      <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem', marginTop: '0.35rem' }}>{edu.details}</p>
-                    )}
-                  </article>
+                    {edu.details && <p className="resume-details">{edu.details}</p>}
+                  </motion.article>
                 ))}
               </>
             )}
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            variants={slideRight}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
           >
             <h3 style={headingStyle}>{resumeSection.skillsLabel}</h3>
-            <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Technical</p>
+            <p className="skills-group-label">Technical</p>
             <SkillTags items={skills.technical} inView={inView} />
             {skills.soft.length > 0 && (
               <>
-                <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', margin: '1.25rem 0 0.5rem' }}>Soft skills</p>
-                <SkillTags items={skills.soft} inView={inView} />
+                <p className="skills-group-label skills-group-label--spaced">Soft skills</p>
+                <SkillTags items={skills.soft} inView={inView} delay={0.15} />
               </>
             )}
 
             {certifications.length > 0 && (
               <>
                 <h3 style={{ ...headingStyle, marginTop: '2.5rem' }}>{resumeSection.certificationsLabel}</h3>
-                <ul style={{ listStyle: 'none' }}>
-                  {certifications.map((cert) => (
-                    <li
+                <ul className="cert-list">
+                  {certifications.map((cert, i) => (
+                    <motion.li
                       key={cert.name}
-                      style={{
-                        padding: '0.75rem 0',
-                        borderBottom: '1px solid var(--border)',
-                        fontSize: '0.9375rem',
-                      }}
+                      className="cert-item"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={inView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: 0.25 + i * 0.1 }}
+                      whileHover={{ x: 6 }}
                     >
-                      <strong style={{ fontWeight: 500 }}>{cert.name}</strong>
-                      <span style={{ display: 'block', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                      <strong>{cert.name}</strong>
+                      <span>
                         {cert.issuer} · {cert.year}
                       </span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </>
@@ -107,11 +128,6 @@ export default function Resume() {
           </motion.div>
         </div>
       </div>
-      <style>{`
-        @media (max-width: 768px) {
-          .resume-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   )
 }
@@ -125,22 +141,17 @@ const headingStyle: CSSProperties = {
   textTransform: 'uppercase',
 }
 
-function SkillTags({ items, inView }: { items: string[]; inView: boolean }) {
+function SkillTags({ items, inView, delay = 0 }: { items: string[]; inView: boolean; delay?: number }) {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+    <div className="skill-tags">
       {items.map((skill, i) => (
         <motion.span
           key={skill}
-          initial={{ opacity: 0, scale: 0.9 }}
+          className="skill-tag"
+          initial={{ opacity: 0, scale: 0.85 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ delay: 0.2 + i * 0.04 }}
-          style={{
-            padding: '0.5rem 1rem',
-            borderRadius: '999px',
-            fontSize: '0.8125rem',
-            border: '1px solid var(--border)',
-            background: 'var(--accent-soft)',
-          }}
+          transition={{ delay: delay + 0.2 + i * 0.05, type: 'spring', stiffness: 200, damping: 16 }}
+          whileHover={{ scale: 1.08, y: -2 }}
         >
           {skill}
         </motion.span>

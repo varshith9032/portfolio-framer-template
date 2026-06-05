@@ -8,7 +8,7 @@
     "phone": "9032279285",
     "location": "Hyderabad, India",
     "website": "https://yoursite.com",
-    "resumePdf": "varshith_resume.pdf"
+    "resumePdf": "/varshith_resume.pdf"
   },
   "social": [
     { "label": "LinkedIn", "href": "https://www.linkedin.com/in/peddi-varshith-2b2902290/" },
@@ -103,6 +103,7 @@
     "secondaryButton": "Download resume"
   },
   "theme": {
+    "preset": "midnight",
     "accent": "#6366f1"
   }
 }

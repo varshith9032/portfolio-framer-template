@@ -1,8 +1,10 @@
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
+import { Pencil } from 'lucide-react'
 import { useState } from 'react'
-import { site, nav } from '../data/content'
+import { useContent } from '../context/ContentContext'
 
 export default function Navbar() {
+  const { site, nav, setEditorOpen } = useContent()
   const [scrolled, setScrolled] = useState(false)
   const { scrollY } = useScroll()
 
@@ -23,7 +25,7 @@ export default function Navbar() {
         display: 'flex',
         alignItems: 'center',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        background: scrolled ? 'rgba(10, 10, 11, 0.8)' : 'transparent',
+        background: scrolled ? 'var(--nav-scrolled-bg)' : 'transparent',
         borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
         transition: 'background 0.3s, border 0.3s',
       }}
@@ -32,19 +34,19 @@ export default function Navbar() {
         <a href="#" style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.125rem' }}>
           {site.shortName}
         </a>
-        <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          {nav.links.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              style={{ fontSize: '0.875rem', color: 'var(--text-muted)', transition: 'color 0.2s' }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-            >
-              {item.label}
-            </a>
-          ))}
-          <a href="#contact" className="btn btn-primary" style={{ padding: '0.625rem 1.25rem', fontSize: '0.8125rem' }}>
+        <nav className="navbar-nav">
+          <div className="navbar-links">
+            {nav.links.map((item) => (
+              <a key={item.id} href={`#${item.id}`} className="nav-link">
+                {item.label}
+              </a>
+            ))}
+          </div>
+          <button type="button" className="nav-edit-btn" onClick={() => setEditorOpen(true)} aria-label="Edit portfolio">
+            <Pencil size={16} />
+            Edit
+          </button>
+          <a href="#contact" className="btn btn-primary navbar-cta">
             {nav.ctaText}
           </a>
         </nav>
