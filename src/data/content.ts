@@ -1,8 +1,12 @@
 import resumeData from './resume.json'
 
-export type ResumeData = typeof resumeData
+type Certification = { name: string; issuer: string; year: string }
 
-export const defaultResume: ResumeData = resumeData
+export type ResumeData = Omit<typeof resumeData, 'certifications'> & {
+  certifications: Certification[]
+}
+
+export const defaultResume: ResumeData = resumeData as ResumeData
 
 /** Path to a file in /public (works on dev server and GitHub Pages). */
 export function resolvePublicAsset(path: string): string {
